@@ -13,3 +13,11 @@ Pada screenshot di atas, terlihat bahwa server berhasil menerima koneksi dari ti
 <br>
 
 Setelah mengganti port server dan client menjadi 8080, maka aplikasi tetap dapat berjalan dengan baik seperti sebelumnya. Hal ini karena baik server maupun client sama sama menggunakan port yang sama, yaitu 8080, sehingga koneksi berhasil dilakukan. Untuk memodifikasi portnya, saya ubah bagian `TcpListener::bind` di file `server.rs` menjadi `"127.0.0.1:8080"` dan juga URI di file `client.rs` menjadi `"ws://127.0.0.1:8080"`. Selama port yang digunakan di kedua sisi sama, maka antara client dan server akan tetap berhasil berkomunikasi. Namun jika hanya salah satu yang diubah, maka client akan gagal connect karena tidak menemukan server di port yang dimaksud. 
+
+<br>
+
+## Experiment 2.3: Small changes, add IP and Port
+![alt text](third.png)  
+<br>
+
+Saya melakukan beberapa perubahan pada file `client.rs` dan `server.rs` untuk menambahkan informasi address asal. Pada sisi client, saya mengubah output menjadi `println!("Henry Aditya Kosasi's Computer - From server: {}")`.  Dengan mengubah hal tersebut, maka asal pesan yang diterima menjadi lebih jelas. Di sisi server, saya mengubah isi broadcast menjadi `format!("{addr}: {text}")` agar semua client bisa mengetahui pesan berasal dari alamat mana. Dengan begitu dapat membuat komunikasi antar client menjadi lebih informatif.
